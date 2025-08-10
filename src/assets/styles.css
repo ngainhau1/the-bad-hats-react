@@ -1,0 +1,159 @@
+/* ============================ */
+/* ===== CÀI ĐẶT CHUNG & LAYOUT ===== */
+/* ============================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.intro-section {
+  background-color: #f8f9fa; /* Một màu nền xám rất nhạt để tạo sự khác biệt */
+}
+
+.feature-icon-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem; /* Tăng kích thước icon */
+}
+
+main {
+    flex: 1;   
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+/* ============================ */
+/* ===== COMPONENT: PRODUCT CARD ===== */
+/* ============================ */
+.product-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #ddd;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #333;
+    font-weight: 600;
+}
+
+/* ============================ */
+/* ===== COMPONENT: FOOTER ===== */
+/* ============================ */
+footer.bg-light {
+  border-top: 1px solid #dee2e6;
+  padding-top: 3rem !important;
+}
+
+footer p, .footer-link {
+  font-size: 0.9rem;
+}
+
+.footer-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  color: #212529;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-link:hover {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+.footer-social-icon {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #212529;
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-social-icon:hover {
+  color: #0d6efd;
+}
+
+/* ============================ */
+/* ===== THƯ VIỆN: REACT-TOASTIFY ===== */
+/* ============================ */
+.Toastify__toast {
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.Toastify__toast-body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.toast-icon-container {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Toast Colors --- */
+.Toastify__toast--success { background: #EAF7F0 !important; color: #1E854A !important; }
+.Toastify__toast--success .toast-icon-container i { color: #34C759; }
+.Toastify__progress-bar--success { background: #34C759 !important; }
+
+.Toastify__toast--error { background: #FDEEEE !important; color: #D92D20 !important; }
+.Toastify__toast--error .toast-icon-container i { color: #FF3B30; }
+.Toastify__progress-bar--error { background: #FF3B30 !important; }
+
+.Toastify__toast--info { background: #EBF5FF !important; color: #007BFF !important; }
+.Toastify__toast--info .toast-icon-container i { color: #007BFF; }
+.Toastify__progress-bar--info { background: #007BFF !important; }
+
+.Toastify__toast--warning { background: #FFF9E6 !important; color: #B54708 !important; }
+.Toastify__toast--warning .toast-icon-container i { color: #FF9500; }
+.Toastify__progress-bar--warning { background: #FF9500 !important; }
+
+
+/* ============================ */
+/* ===== RESPONSIVE CHO FOOTER ===== */
+/* ============================ */
+/* Áp dụng cho các màn hình có chiều rộng tối đa là 767px (điện thoại) */
+@media (max-width: 767px) {
+  
+  /* Căn giữa toàn bộ nội dung trong các cột footer trên mobile */
+  footer .row > div {
+    text-align: center !important;
+  }
+
+  /* Giảm kích thước tiêu đề cột */
+  footer h5 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem !important; /* Giảm khoảng cách dưới */
+  }
+
+  /* Giảm kích thước chữ và khoảng cách các dòng */
+  footer p, .footer-link {
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  /* Căn giữa và giảm khoảng cách cho copyright */
+  footer .row.align-items-center {
+    text-align: center;
+  }
+}

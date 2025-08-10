@@ -1,0 +1,235 @@
+{
+  "products": [
+    {
+      "id": "sp01",
+      "name": "Nón Bucket Vải Kaki",
+      "price": 250000,
+      "image": "/imgs/non_bucket1.webp",
+      "description": "Thiết kế trẻ trung, chất liệu vải kaki bền đẹp, thoáng khí. Phù hợp đi chơi, dạo phố, chống nắng hiệu quả cho ngày hè năng động."
+    },
+    {
+      "id": "sp02",
+      "name": "Nón Lưỡi Trai Thể Thao",
+      "price": 180000,
+      "image": "/imgs/non_luoichai1.webp",
+      "description": "Phong cách thể thao năng động với chất liệu thấm hút mồ hôi tốt. Dễ dàng phối đồ khi đi chơi, tập luyện hoặc du lịch."
+    },
+    {
+      "id": "sp03",
+      "name": "Nón Jacket Cổ Điển",
+      "price": 320000,
+      "image": "/imgs/non_jacket1.webp",
+      "description": "Mang nét cổ điển pha lẫn hiện đại, chiếc nón jacket là phụ kiện không thể thiếu cho những ai yêu thích thời trang hoài cổ và phong cách unisex."
+    },
+    {
+      "id": "sp04",
+      "name": "Nón Snapback Hiphop",
+      "price": 360000,
+      "image": "/imgs/non_snapback1.webp",
+      "description": "Đậm chất đường phố, cá tính mạnh mẽ. Nón Snapback phù hợp với giới trẻ yêu thích phong cách hiphop, freestyle và thời trang năng động."
+    },
+    {
+      "id": "sp05",
+      "name": "Nón Beret Thời Trang",
+      "price": 290000,
+      "image": "/imgs/non_beret1.webp",
+      "description": "Đậm chất nghệ sĩ và thanh lịch, nón beret là điểm nhấn tinh tế cho những outfit nhẹ nhàng, lãng mạn và cổ điển."
+    },
+    {
+      "id": "sp06",
+      "name": "Nón Dạ Tây Lịch Lãm",
+      "price": 310000,
+      "image": "/imgs/non_dantay1.webp",
+      "description": "Phong cách quý ông cổ điển với chất liệu dạ cao cấp. Nón dạ Tây phù hợp với thời tiết se lạnh và các dịp trang trọng, lịch sự."
+    },
+    {
+      "id": "sp07",
+      "name": "Nón Vành Cói Vintage",
+      "price": 240000,
+      "image": "/imgs/non_vanh1.webp",
+      "description": "Chất liệu cói tự nhiên nhẹ và thoáng mát. Nón vành rộng mang phong cách vintage, là lựa chọn lý tưởng cho những chuyến đi biển và picnic ngoài trời."
+    },
+    {
+      "id": "sp08",
+      "name": "Nón Jacket Trắng Tinh Tế",
+      "price": 179000,
+      "image": "/imgs/non_jacket2.webp",
+      "description": "Sự kết hợp hoàn hảo giữa phong cách cổ điển của nón jacket và sắc trắng tinh khôi, hiện đại. Chất liệu cao cấp, form dáng chuẩn, dễ dàng phối hợp với nhiều trang phục để tạo nên vẻ ngoài thanh lịch và tinh tế."
+    },
+    {
+      "id": "sp09",
+      "name": "Nón Phớt Lịch Lãm",
+      "price": 240000,
+      "image": "/imgs/non_phot3.webp",
+      "description": "Biểu tượng của sự lịch lãm và phong thái quý ông. Nón phớt với thiết kế vành nhỏ cổ điển, chất liệu cao cấp, là phụ kiện hoàn hảo để nâng tầm bộ trang phục của bạn trong các sự kiện quan trọng hay dạo phố hàng ngày."
+    },
+    {
+      "id": "sp10",
+      "name": "Nón Cao Bồi Thời Trang",
+      "price": 200000,
+      "image": "/imgs/non_phot2.webp",
+      "description": "Lấy cảm hứng từ miền Viễn Tây hoang dã, chiếc nón cao bồi thời trang mang đến vẻ ngoài phóng khoáng và đầy cá tính. Thiết kế được cách điệu để phù hợp với xu hướng hiện đại, là điểm nhấn ấn tượng cho những ai yêu thích phong cách độc đáo."
+    },
+    {
+      "id": "sp11",
+      "name": "Nón Đan Tay Thời Trang",
+      "price": 14000,
+      "image": "/imgs/non_dantay.webp",
+      "description": "Thiết kế tinh xảo từ kỹ thuật đan tay thủ công, mang lại vẻ đẹp mộc mạc và gần gũi. Chiếc nón không chỉ giúp che nắng mà còn là một phụ kiện thời trang độc đáo, thể hiện sự khéo léo và gu thẩm mỹ tinh tế."
+    },
+    {
+      "id": "625f",
+      "name": "Nón Cao Bồi",
+      "price": 360000,
+      "image": "/imgs/non_caoboi1.webp",
+      "description": "Thiết kế độc đáo, cá tính mạnh mẽ lấy cảm hứng từ phong cách cao bồi miền Tây. Phù hợp cho những ai thích phong cách nổi bật và khác biệt."
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@36.com",
+      "password": "admin123",
+      "role": "admin",
+      "fullName": "Admin The Bad Hats"
+    },
+    {
+      "id": "2",
+      "email": "customer@gmail.com",
+      "password": "user123",
+      "role": "user",
+      "fullName": "Khách Hàng A"
+    },
+    {
+      "id": "dd93",
+      "fullName": "dat",
+      "email": "dat107@gmail.com",
+      "password": "nhaunhau123",
+      "role": "user"
+    },
+    {
+      "id": "b89e",
+      "fullName": "duy",
+      "email": "duy@gmail.com",
+      "password": "123",
+      "role": "user"
+    },
+    {
+      "id": "3aa0",
+      "fullName": "skibidi",
+      "email": "skibidi@gmail.com",
+      "password": "skibidi",
+      "role": "user"
+    },
+    {
+      "id": "3ab4",
+      "fullName": "ádá",
+      "email": "aaa@gmail.com",
+      "password": "áđá",
+      "role": "user"
+    },
+    {
+      "id": "abb0",
+      "fullName": "skibidi",
+      "email": "skibidi1@gmail.com",
+      "password": "skibidi",
+      "role": "user"
+    },
+    {
+      "id": "admin2",
+      "fullName": "admin2",
+      "email": "admin2@gmail.com",
+      "password": "admin",
+      "role": "admin"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Nón Bucket"
+    },
+    {
+      "id": "2",
+      "name": "Nón Lưỡi Trai"
+    },
+    {
+      "id": "3",
+      "name": "Nón Jacket"
+    },
+    {
+      "id": "4",
+      "name": "Nón Snapback"
+    }
+  ],
+  "orders": [
+    {
+      "id": "0b67",
+      "customerInfo": {
+        "userId": "abb0",
+        "name": "skibidi",
+        "address": "363636",
+        "phone": "36363636"
+      },
+      "items": [
+        {
+          "id": "sp03",
+          "name": "Nón Jacket Cổ Điển",
+          "price": 320000,
+          "image": "/imgs/non_jacket1.webp",
+          "description": "Mang nét cổ điển pha lẫn hiện đại, chiếc nón jacket là phụ kiện không thể thiếu cho những ai yêu thích thời trang hoài cổ và phong cách unisex.",
+          "quantity": 1
+        },
+        {
+          "id": "sp04",
+          "name": "Nón Snapback Hiphop",
+          "price": 360000,
+          "image": "/imgs/non_snapback1.webp",
+          "description": "Đậm chất đường phố, cá tính mạnh mẽ. Nón Snapback phù hợp với giới trẻ yêu thích phong cách hiphop, freestyle và thời trang năng động.",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 680000,
+      "status": "Pending",
+      "createdAt": "2025-08-08T14:10:26.023Z"
+    },
+    {
+      "id": "180f",
+      "customerInfo": {
+        "userId": "dd93",
+        "name": "dat",
+        "address": "ádfadas",
+        "phone": "ấ"
+      },
+      "items": [
+        {
+          "id": "sp02",
+          "name": "Nón Lưỡi Trai Thể Thao",
+          "price": 180000,
+          "image": "/imgs/non_luoichai1.webp",
+          "description": "Phong cách thể thao năng động với chất liệu thấm hút mồ hôi tốt. Dễ dàng phối đồ khi đi chơi, tập luyện hoặc du lịch.",
+          "quantity": 1
+        },
+        {
+          "id": "sp07",
+          "name": "Nón Vành Cói Vintage",
+          "price": 240000,
+          "image": "/imgs/non_vanh1.webp",
+          "description": "Chất liệu cói tự nhiên nhẹ và thoáng mát. Nón vành rộng mang phong cách vintage, là lựa chọn lý tưởng cho những chuyến đi biển và picnic ngoài trời.",
+          "quantity": 1
+        },
+        {
+          "id": "sp04",
+          "name": "Nón Snapback Hiphop",
+          "price": 360000,
+          "image": "/imgs/non_snapback1.webp",
+          "description": "Đậm chất đường phố, cá tính mạnh mẽ. Nón Snapback phù hợp với giới trẻ yêu thích phong cách hiphop, freestyle và thời trang năng động.",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 780000,
+      "status": "Pending",
+      "createdAt": "2025-08-09T03:41:32.982Z"
+    }
+  ],
+  "reviews": []
+}

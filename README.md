@@ -10,7 +10,7 @@ npm hoặc yarn
 Hướng dẫn cài đặt và sử dụng
 Clone repository:
 
-git clone [Địa chỉ repository của bạn]
+git clone https://github.com/ngainhau1/the-bad-hats-react.git
 cd the-bad-hats-react
 
 Cài đặt các gói phụ thuộc:

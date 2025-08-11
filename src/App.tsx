@@ -48,7 +48,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="admin/orders" element={<AdminOrdersPage />} />
             </Route>
-          </Route> {/* <--- Thẻ đóng còn thiếu nằm ở đây */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </CartProvider>

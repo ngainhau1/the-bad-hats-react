@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
-import ProductModal from '../components/ProductModal'; // Import modal
+import ProductModal from '../components/ProductModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../app/store';
 import { fetchProducts, addProduct, updateProduct } from '../app/slices/ProductSlice';

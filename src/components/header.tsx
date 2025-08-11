@@ -10,7 +10,7 @@ const Header = () => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
           <NavLink className="navbar-brand fw-bold d-flex align-items-center" to="/">
-            <img src="imgs/logo.png" alt="Logo" className="me-2" style={{ height: '85px' }} />
+            <img src="/imgs/logo.png" alt="Logo" className="me-2" style={{ height: '85px' }} />
             The Bad Hats
           </NavLink>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

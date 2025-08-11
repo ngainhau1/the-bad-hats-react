@@ -3,67 +3,82 @@ import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../app/store';
-import { fetchProducts, addProduct, updateProduct } from '../app/slices/ProductSlice';
+import { fetchProducts, addProduct, updateProduct, searchProducts } from '../app/slices/ProductSlice';
 import { Product } from '../data/products';
 
 /**
  * Component trang hiển thị danh sách tất cả sản phẩm.
- * - Cho phép tìm kiếm sản phẩm.
+ * - Cho phép tìm kiếm sản phẩm bằng API.
  * - Cung cấp các chức năng quản lý (Thêm/Sửa/Xóa) cho Admin.
  */
 const ProductPage = () => {
-  // Hooks để tương tác với Redux
+  // Hooks để tương tác với Redux store
   const dispatch = useDispatch<AppDispatch>();
   const { items: products, status, error } = useSelector((state: RootState) => state.products);
   const { currentUser } = useSelector((state: RootState) => state.auth);
   
-  // State cục bộ cho các chức năng của trang
-  const [searchTerm, setSearchTerm] = useState(''); // Lưu trữ nội dung tìm kiếm
-  const [showModal, setShowModal] = useState(false); // Điều khiển việc hiện/ẩn modal
-  const [productToEdit, setProductToEdit] = useState<Product | null>(null); // Lưu sản phẩm đang được sửa
+  // State cục bộ để quản lý các yếu tố giao diện của riêng trang này
+  const [searchTerm, setSearchTerm] = useState(''); // Lưu trữ nội dung trong ô tìm kiếm
+  const [showModal, setShowModal] = useState(false); // Điều khiển việc hiện/ẩn modal Thêm/Sửa
+  const [productToEdit, setProductToEdit] = useState<Product | null>(null); // Lưu sản phẩm đang được chỉnh sửa
 
-  // Lấy danh sách sản phẩm từ API khi component được render lần đầu
+  // useEffect để fetch tất cả sản phẩm khi trang được tải lần đầu
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchProducts());
-    }
-  }, [status, dispatch]);
+    dispatch(fetchProducts());
+  }, [dispatch]); // Dependency array `[dispatch]` đảm bảo nó chỉ chạy một lần
+
+  // useEffect để xử lý logic tìm kiếm khi người dùng gõ
+  useEffect(() => {
+    // Kỹ thuật Debouncing: tạo một bộ đếm thời gian để trì hoãn việc gọi API
+    const delayDebounceFn = setTimeout(() => {
+      // Chỉ gửi yêu cầu API sau khi người dùng ngừng gõ 300ms
+      if (searchTerm) {
+        dispatch(searchProducts(searchTerm));
+      } else {
+        // Nếu ô tìm kiếm trống, fetch lại toàn bộ danh sách sản phẩm
+        // (Điều này có thể được tối ưu hơn, nhưng hoạt động tốt cho trường hợp này)
+        dispatch(fetchProducts());
+      }
+    }, 300); // Thời gian chờ là 300ms
+
+    // Cleanup function: Hủy bộ đếm thời gian cũ mỗi khi `searchTerm` thay đổi
+    // Điều này ngăn chặn việc gửi API cho mỗi lần gõ phím
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, dispatch]); // Effect này sẽ chạy lại mỗi khi `searchTerm` thay đổi
 
   /** Mở modal ở chế độ "Thêm mới" */
   const handleShowAddModal = () => {
-    setProductToEdit(null); // Đảm bảo không có sản phẩm nào được chọn để sửa
+    setProductToEdit(null); // Reset productToEdit để modal biết đây là form thêm mới
     setShowModal(true);
   };
   
-  /** Mở modal ở chế độ "Chỉnh sửa" */
+  /** Mở modal ở chế độ "Chỉnh sửa" với dữ liệu của sản phẩm được chọn */
   const handleShowEditModal = (product: Product) => {
-    setProductToEdit(product); // Lưu thông tin sản phẩm cần sửa vào state
+    setProductToEdit(product); // Cung cấp dữ liệu sản phẩm cho modal
     setShowModal(true);
   };
 
   /** Xử lý sự kiện lưu từ modal, cho cả Thêm và Sửa */
   const handleSave = (productData: Omit<Product, 'id'> | Product) => {
-    // Nếu `productData` có thuộc tính 'id', đó là chế độ Sửa
+    // Dựa vào việc `productData` có thuộc tính 'id' hay không để quyết định dispatch action nào
     if ('id' in productData) {
       dispatch(updateProduct(productData as Product));
     } else {
-      // Nếu không, đó là chế độ Thêm mới
       dispatch(addProduct(productData));
     }
-    setShowModal(false); // Đóng modal sau khi lưu
+    setShowModal(false); // Tự động đóng modal sau khi lưu
   };
 
-  // Lọc danh sách sản phẩm dựa trên nội dung tìm kiếm (client-side filtering)
-  const filteredProducts = products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
-
   /**
-   * Hàm render nội dung chính của trang, xử lý các trạng thái tải, lỗi, và thành công.
+   * Hàm render nội dung chính của trang, dựa trên trạng thái gọi API
    */
   const renderContent = () => {
-    if (status === 'loading') return <p className="text-center">Đang tải dữ liệu...</p>;
+    if (status === 'loading') return <p className="text-center">Đang tải...</p>;
     if (status === 'failed') return <p className="text-center text-danger">{error}</p>;
-    if (filteredProducts.length > 0) {
-      return filteredProducts.map(p => (
+    
+    if (products.length > 0) {
+      // Lặp qua mảng `products` (kết quả từ API) và render ProductCard
+      return products.map(p => (
         <ProductCard 
           key={p.id} 
           product={p} 
@@ -79,7 +94,7 @@ const ProductPage = () => {
     <div className="container my-5">
       <h1 className="text-center mb-4">Tất Cả Sản Phẩm</h1>
 
-      {/* Nút "Thêm sản phẩm mới" chỉ hiển thị cho Admin */}
+      {/* Nút "Thêm sản phẩm mới" chỉ hiển thị khi admin đăng nhập */}
       {currentUser?.role === 'admin' && (
         <div className="text-end mb-4">
           <button className="btn btn-success" onClick={handleShowAddModal}>
@@ -93,19 +108,19 @@ const ProductPage = () => {
         <input
           type="text"
           className="form-control"
-          placeholder="Tìm kiếm sản phẩm..."
+          placeholder="Tìm kiếm sản phẩm bằng API..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <span className="input-group-text"><i className="bi bi-search"></i></span>
       </div>
 
-      {/* Lưới hiển thị sản phẩm */}
+      {/* Lưới hiển thị danh sách sản phẩm */}
       <div className="row gy-4">
         {renderContent()}
       </div>
 
-      {/* Modal Thêm/Sửa sản phẩm */}
+      {/* Component Modal được điều khiển bởi state của trang này */}
       <ProductModal 
         show={showModal}
         onHide={() => setShowModal(false)}

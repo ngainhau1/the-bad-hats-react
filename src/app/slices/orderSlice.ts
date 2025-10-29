@@ -1,34 +1,64 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axiosClient from '../../api/axiosClient';
 
-/**
- * AsyncThunk để lấy tất cả đơn hàng từ API.
- * Thường dùng cho trang quản lý của Admin.
- */
+// Kiểu đơn hàng tối giản (dùng any cho đơn giản nếu dữ liệu thay đổi)
+export interface Order {
+  id: string;
+  status: string;
+  [key: string]: any;
+}
+
+// Lấy tất cả đơn hàng
 export const fetchOrders = createAsyncThunk('orders/fetchOrders', async () => {
-    const response = await axiosClient.get('/orders');
-    return response.data;
+  const response = await axiosClient.get('/orders');
+  return response.data as Order[];
 });
 
-// Định nghĩa cấu trúc và trạng thái khởi tạo cho slice đơn hàng
+// Cập nhật trạng thái đơn hàng theo id (PATCH tới json-server)
+export const updateOrderStatus = createAsyncThunk(
+  'orders/updateOrderStatus',
+  async ({ id, status }: { id: string; status: string }) => {
+    const response = await axiosClient.patch(`/orders/${id}`, { status });
+    return response.data as Order;
+  }
+);
+
+type OrdersState = {
+  items: Order[];
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error?: string | null;
+};
+
+const initialState: OrdersState = {
+  items: [],
+  status: 'idle',
+  error: null,
+};
+
 const orderSlice = createSlice({
-    name: 'orders',
-    initialState: {
-        items: [],
-        status: 'idle', // 'idle' | 'loading' | 'succeeded'
-    },
-    reducers: {},
-    // Xử lý các trạng thái của asyncThunk fetchOrders
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchOrders.pending, (state) => {
-                state.status = 'loading'; // Khi đang gọi API
-            })
-            .addCase(fetchOrders.fulfilled, (state, action) => {
-                state.status = 'succeeded'; // Khi gọi API thành công
-                state.items = action.payload;
-            });
-    },
+  name: 'orders',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchOrders.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchOrders.fulfilled, (state, action: PayloadAction<Order[]>) => {
+        state.status = 'succeeded';
+        state.items = action.payload;
+      })
+      .addCase(fetchOrders.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message ?? 'Failed to fetch orders';
+      })
+      .addCase(updateOrderStatus.fulfilled, (state, action: PayloadAction<Order>) => {
+        const updated = action.payload;
+        const idx = state.items.findIndex((o) => o.id === updated.id);
+        if (idx !== -1) state.items[idx] = updated;
+      });
+  },
 });
 
 export default orderSlice.reducer;
+

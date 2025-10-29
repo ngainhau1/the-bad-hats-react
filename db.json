@@ -203,7 +203,7 @@
         }
       ],
       "totalAmount": 680000,
-      "status": "Pending",
+      "status": "Order",
       "createdAt": "2025-08-08T14:10:26.023Z"
     },
     {
@@ -241,7 +241,7 @@
         }
       ],
       "totalAmount": 780000,
-      "status": "Pending",
+      "status": "Order",
       "createdAt": "2025-08-09T03:41:32.982Z"
     },
     {
@@ -263,7 +263,7 @@
         }
       ],
       "totalAmount": 180000,
-      "status": "Pending",
+      "status": "Order",
       "createdAt": "2025-08-11T11:34:23.873Z"
     }
   ],

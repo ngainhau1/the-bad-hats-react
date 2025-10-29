@@ -148,6 +148,13 @@
       "email": "abc@gmail.com",
       "password": "abc",
       "role": "user"
+    },
+    {
+      "id": "ecdf",
+      "fullName": "tester",
+      "email": "test@user.com",
+      "password": "123456",
+      "role": "user"
     }
   ],
   "categories": [

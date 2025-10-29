@@ -1,10 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import ProductCard from '../components/ProductCard';
 import ProductModal from '../components/ProductModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../app/store';
 import { fetchProducts, addProduct, updateProduct, searchProducts } from '../app/slices/ProductSlice';
 import { Product } from '../data/products';
+
+// Danh mục cơ bản theo loại nón
+const CATEGORIES: { key: string; label: string; match: string[] }[] = [
+  { key: 'all', label: 'Tất cả', match: [] },
+  { key: 'bucket', label: 'Nón Bucket', match: ['bucket'] },
+  { key: 'luoichai', label: 'Nón Lưỡi Trai', match: ['luoichai'] },
+  { key: 'jacket', label: 'Nón Jacket', match: ['jacket'] },
+  { key: 'snapback', label: 'Nón Snapback', match: ['snapback'] },
+  { key: 'beret', label: 'Nón Beret', match: ['beret'] },
+  { key: 'dantay', label: 'Nón Đan Tay', match: ['dantay'] },
+  { key: 'vanh', label: 'Nón Vành', match: ['vanh'] },
+  { key: 'phot', label: 'Nón Phớt', match: ['phot'] },
+  { key: 'caoboi', label: 'Nón Cao Bồi', match: ['caoboi'] },
+];
 
 /**
  * Component trang hiển thị danh sách tất cả sản phẩm.
@@ -16,6 +30,29 @@ const ProductPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items: products, status, error } = useSelector((state: RootState) => state.products);
   const { currentUser } = useSelector((state: RootState) => state.auth);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+
+  // Suy luận danh mục dựa trên tên/ảnh sản phẩm
+  const detectCategory = (p: Product): string => {
+    const text = `${p.name ?? ''} ${p.image ?? ''}`.toLowerCase();
+    for (const c of CATEGORIES) {
+      if (c.key === 'all') continue;
+      if (c.match.some((m) => text.includes(m))) return c.key;
+    }
+    return 'other';
+  };
+
+  // Đếm số lượng theo danh mục hiện có
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const c of CATEGORIES) counts[c.key] = 0;
+    for (const p of products) {
+      const k = detectCategory(p);
+      if (counts[k] !== undefined) counts[k]++;
+    }
+    counts['all'] = products.length;
+    return counts;
+  }, [products]);
   
   // State cục bộ để quản lý các yếu tố giao diện của riêng trang này
   const [searchTerm, setSearchTerm] = useState(''); // Lưu trữ nội dung trong ô tìm kiếm
@@ -78,7 +115,8 @@ const ProductPage = () => {
     
     if (products.length > 0) {
       // Lặp qua mảng `products` (kết quả từ API) và render ProductCard
-      return products.map(p => (
+      const filtered = activeCategory === 'all' ? products : products.filter((p) => detectCategory(p) === activeCategory);
+      return filtered.map(p => (
         <ProductCard 
           key={p.id} 
           product={p} 
@@ -92,6 +130,22 @@ const ProductPage = () => {
 
   return (
     <div className="container my-5">
+      {/* Danh mục (lọc nhanh theo loại nón) */}
+      <div className="mb-4">
+        <div className="d-flex flex-wrap gap-2">
+          {CATEGORIES.map((c) => (
+            <button
+              key={c.key}
+              type="button"
+              className={`btn btn-sm ${activeCategory === c.key ? 'btn-dark' : 'btn-outline-dark'}`}
+              onClick={() => setActiveCategory(c.key)}
+            >
+              {c.label}
+              <span className="ms-1 text-muted">({categoryCounts[c.key] ?? 0})</span>
+            </button>
+          ))}
+        </div>
+      </div>
       <h1 className="text-center mb-4">Tất Cả Sản Phẩm</h1>
 
       {/* Nút "Thêm sản phẩm mới" chỉ hiển thị khi admin đăng nhập */}

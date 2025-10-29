@@ -18,8 +18,6 @@ const Footer = () => {
           <div className="col-lg-2 col-md-3 col-6 mb-4">
             <h5 className="text-uppercase mb-4 fw-bold">Về chúng tôi</h5>
             <p><Link to="/about" className="footer-link">Về The Bad Hats</Link></p>
-            <p><Link to="/stores" className="footer-link">Hệ thống cửa hàng</Link></p>
-            <p><Link to="/blog" className="footer-link">Tin tức</Link></p>
           </div>
 
           {/* Cột 3: Hỗ trợ - Chiếm 1 cột trên mobile */}

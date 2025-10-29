@@ -15,6 +15,10 @@ import CheckoutPage from './pages/CheckoutPage';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminOrdersPage from './pages/AdminOrdersPage';
+import AboutPage from './pages/AboutPage';
+import FaqPage from './pages/FaqPage';
+import PolicyPage from './pages/PolicyPage';
+import ShippingPage from './pages/ShippingPage';
 
 function App() {
   return (
@@ -43,6 +47,10 @@ function App() {
             <Route path="order-success" element={<OrderSuccessPage />} />
             <Route path="account" element={<AccountPage />} />
             <Route path="register" element={<RegisterPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="faq" element={<FaqPage />} />
+            <Route path="policy" element={<PolicyPage />} />
+            <Route path="shipping" element={<ShippingPage />} />
             
             {/* Admin Protected Routes */}
             <Route element={<ProtectedRoute />}>
